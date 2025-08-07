@@ -1,4 +1,5 @@
 from presto import Presto
+from picovector import ANTIALIAS_BEST, PicoVector
 
 class Colors:
     def __init__(self, display):
@@ -14,6 +15,9 @@ class BaseApp:
         self.touch = self.presto.touch
 
         self.layers = presto_kwargs.get("layers", 1)
+
+        self.vector = PicoVector(self.display)
+        self.vector.set_antialiasing(ANTIALIAS_BEST)
 
         self.width, self.height = self.display.get_bounds()
         self.center_x, self.center_y = self.center = (self.width // 2, self.height // 2)

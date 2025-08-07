@@ -96,6 +96,8 @@ class Spotify(BaseApp):
         self.presto.update()
 
         self.display.set_font("sans")
+        self.vector.set_font("Roboto-Medium.af", 30)
+        self.vector.set_font_letter_spacing(100)
         self.display.set_layer(1)
         self.display_text("Connecting to WIFI", (90, self.height - 80), thickness=2)
         self.presto.update()
@@ -260,7 +262,7 @@ class Spotify(BaseApp):
     def write_track(self):
         """Writes the track name and artists on the screen."""
         if self.state.show_controls and self.state.track:
-            self.display.set_thickness(3)
+            self.vector.set_font_size(40)
 
             track_name = self.state.track.get("name")
             # strip non-ascii characters
@@ -269,23 +271,23 @@ class Spotify(BaseApp):
                 track_name = track_name[:20] + " ..."
             # shadow effect
             self.display.set_pen(self.colors._BLACK)
-            self.display.text(track_name, 20, self.height - 137, scale=1.1)
+            self.vector.text(track_name, 23, self.height - 130)
             
             self.display.set_pen(self.colors.WHITE)
-            self.display.text(track_name, 18, self.height - 140, scale=1.1)
+            self.vector.text(track_name, 20, self.height - 133)
             
             artists = ", ".join([artist.get("name") for artist in self.state.track.get("artists")])
             # strip non-ascii characters
             artists = ''.join(i if ord(i) < 128 else ' ' for i in artists)
             if len(artists) > 35:
                 artists = artists[:35] + " ..."
-            self.display.set_thickness(2)
+            self.vector.set_font_size(28)
             # shadow effect
             self.display.set_pen(self.colors._BLACK)
-            self.display.text(artists, 20, self.height - 108, scale=0.7)
+            self.vector.text(artists, 23, self.height - 100)
             
             self.display.set_pen(self.colors.WHITE)
-            self.display.text(artists, 18, self.height - 111, scale=0.7)
+            self.vector.text(artists, 20, self.height - 103)
 
     async def display_loop(self):
         """Periodically updates the display with the latest track info and controls."""
