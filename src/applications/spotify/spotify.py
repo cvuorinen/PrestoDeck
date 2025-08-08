@@ -98,6 +98,7 @@ class Spotify(BaseApp):
         self.display.set_font("sans")
         self.vector.set_font("Roboto-Medium.af", 30)
         self.vector.set_font_letter_spacing(100)
+        self.vector.set_font_word_spacing(100)
         self.display.set_layer(1)
         self.display_text("Connecting to WIFI", (90, self.height - 80), thickness=2)
         self.presto.update()
